@@ -18,7 +18,7 @@ class PostController extends Controller
         // DBにあるpostsデータを取ってきて、postフォルダのindex.blade.phpへデータを渡す
         $posts = Post::all();
         // dd($posts);
-        // エロクアント
+        // エnロクアント
         return view('posts.index', ['posts'=>$posts]);
         
     }
@@ -26,5 +26,22 @@ class PostController extends Controller
     public function create()
     {
         return view('posts.create');
+    }
+
+    public function store(Request $request)
+    {
+        // スーパーグローバル変数に格納されたデータを受け取る
+        // 受け取ったデータをDBへ保存する
+
+        $post = new Post;
+        // 左辺がDB（カラム）,右辺がフォームの中身（name属性）
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->user_id = 1;
+
+        $post->save();
+        
+        // リダイレクト処理
+        return redirect()->route('posts.index');
     }
 }

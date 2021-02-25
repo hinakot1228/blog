@@ -11,7 +11,7 @@
   <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <!-- @if ($errors->any()) 
+            {{-- <!-- @if ($errors->any()) 
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -19,8 +19,10 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif -->
-            <form action="#" method="POST">
+            @endif --> --}}
+            <form action="{{ route('posts.store') }}" method="POST">
+            {{-- サニタイジング防止 --}}
+            @csrf
                 <div class="form-group">
                     <label>タイトル</label>
                     <input type="text" class="form-control" placeholder="タイトルを入力して下さい" name="title">
