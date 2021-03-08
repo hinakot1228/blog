@@ -40,6 +40,12 @@ Route::post('/posts', 'PostController@store')->name('posts.store');
 // name()メソッド：ルーティングに名前付けしている
 // /post post送信の別名は、posts.storeである。
 
+// 詳細機能
+Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
+
+// 削除機能
+Route::delete('/posts/{post}', 'PostController@destroy')->name('posts.destroy');
+
 Route::get('/posts/edit', function () {
     return view('posts.edit');
 });

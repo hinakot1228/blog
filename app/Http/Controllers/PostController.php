@@ -18,7 +18,7 @@ class PostController extends Controller
         // DBにあるpostsデータを取ってきて、postフォルダのindex.blade.phpへデータを渡す
         $posts = Post::all();
         // dd($posts);
-        // エnロクアント
+        // エロクアント
         return view('posts.index', ['posts'=>$posts]);
         
     }
@@ -32,7 +32,7 @@ class PostController extends Controller
     {
         // スーパーグローバル変数に格納されたデータを受け取る
         // 受け取ったデータをDBへ保存する
-
+        // Postクラスであり、Modelクラスである→モデル＝DB、つまり、DBに接続する＝Postテーブルに接続する　→「エロクアント」
         $post = new Post;
         // 左辺がDB（カラム）,右辺がフォームの中身（name属性）
         $post->title = $request->title;
@@ -42,6 +42,22 @@ class PostController extends Controller
         $post->save();
         
         // リダイレクト処理
+        return redirect()->route('posts.index');
+    }
+
+    // web.phpの{post}が$idとなる
+    public function show($id)
+    {
+        // 送られてきたidでデータベース検索、該当のデータを抽出
+        $post = Post::find($id);
+        return view('posts.show', ['post'=>$post]);
+    }
+
+    public function destroy($id)
+    {
+        $post = Post::find($id);
+        $post->delete();
+
         return redirect()->route('posts.index');
     }
 }
