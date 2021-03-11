@@ -21,16 +21,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::get('/posts', function () {
-//     return view('posts.index');
-// });
 
+Route::resource('posts', 'PostController');
+
+// 7つのアクション。
 Route::get('/posts', 'PostController@index')->name('posts.index');
 // /postsというリクエストがGET送信できた時には、PostController.phpのindexメソッドを起動せよ
-
-// Route::get('/posts/create', function () {
-//     return view('posts.create');
-// });
 
 // create機能の作り方
 // create.blade.phpの見た目を表示するためのルーティング
@@ -46,10 +42,8 @@ Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
 // 削除機能
 Route::delete('/posts/{post}', 'PostController@destroy')->name('posts.destroy');
 
-Route::get('/posts/edit', function () {
-    return view('posts.edit');
-});
+// 編集機能
+Route::get('/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
 
-Route::get('/posts/show', function () {
-    return view('posts.show');
-});
+// 更新処理
+Route::put('/posts/{post}', 'PostController@update')->name('posts.update');

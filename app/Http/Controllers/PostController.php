@@ -60,4 +60,22 @@ class PostController extends Controller
 
         return redirect()->route('posts.index');
     }
+
+    public function edit($id)
+    {
+        $post = Post::find($id);
+        return view('posts.edit', ['post'=>$post]);
+    }
+
+                        // ↓formで送信されたデータが格納されたもの
+    public function update(Request $request, $id)
+    {
+        $post = Post::find($id);
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->user_id = 1;
+
+        $post->save();
+        return view('posts.show', compact('post'));
+    }
 }

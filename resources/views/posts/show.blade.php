@@ -18,7 +18,7 @@
                   <div class="card-body">
                   <p class="card-text">内容：{{ $post->body }}</p>
                   <p>投稿日時：</p>
-                  {{-- <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">編集する</a> --}}
+                  <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">編集する</a>
                   <form action='{{ route('posts.destroy', $post->id) }}' method='post'>
                     @csrf
                     @method('delete')
