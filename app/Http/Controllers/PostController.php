@@ -8,12 +8,22 @@ use Illuminate\Http\Request;
 // postモデルを使うための準備＝postsテーブルにアクセス
 use App\Post;
 
+// UserテーブルはAuth機能を錯視すれば自動でUserモデルが使えるようになる
+use App\User;
+use Auth;
+
 class PostController extends Controller
 {
     //
     // ここにモデルへのアクセスして、データを取ってきたり、データを作ったり、更新したり、編集・削除する処理を書く
     public function index()
     {
+        // $login_user_id = Auth::id();
+        // dd($login_user_id);
+        $user = Post::find(1)->user->name;
+                            // ↑user：Post.php（モデル）のuserメソッド
+        // dd($user);
+
         // 一覧機能を作るためのメソッド
         // DBにあるpostsデータを取ってきて、postフォルダのindex.blade.phpへデータを渡す
         $posts = Post::all();
