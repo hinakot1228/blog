@@ -15,7 +15,9 @@
             <div class="card-header">
                 投稿一覧
             </div>
+            
             @foreach ($posts as $post)
+            {{-- {{dd($post->user)}} --}}
             <div class="card-body">
                 <h5 class="card-title">タイトル : {{ $post->title }}</h5>
                 <p class="card-text">
@@ -23,6 +25,11 @@
                 </p>
                 <p class="card-text">投稿者：{{ $post->user->name }}さん</p>
                 <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">詳細へ</a>
+                <form action='{{ route('posts.destroy', $post->id) }}' method='post'>
+                  @csrf
+                  @method('delete')
+                    <input type='submit' value='削除' class="btn btn-danger" onclick='return confirm("本当に削除しますか？");'>
+                </form>
             </div>
             <div class="card-footer text-muted">
                 投稿日時 : {{ $post->created_at }}

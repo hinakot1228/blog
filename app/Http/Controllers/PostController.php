@@ -20,13 +20,15 @@ class PostController extends Controller
     {
         // $login_user_id = Auth::id();
         // dd($login_user_id);
-        $user = Post::find(1)->user->name;
-                            // ↑user：Post.php（モデル）のuserメソッド
-        // dd($user);
+
+        // $user = Post::find(1)->user->name;
+                                // ↑user：Post.php（モデル）のuserメソッド
+        $posts = Post::all();
+        // dd($posts);
 
         // 一覧機能を作るためのメソッド
         // DBにあるpostsデータを取ってきて、postフォルダのindex.blade.phpへデータを渡す
-        $posts = Post::all();
+        // $posts = Post::all();
         // dd($posts);
         // エロクアント
         return view('posts.index', ['posts'=>$posts]);
@@ -60,6 +62,7 @@ class PostController extends Controller
     {
         // 送られてきたidでデータベース検索、該当のデータを抽出
         $post = Post::find($id);
+        // dd($post);
         return view('posts.show', ['post'=>$post]);
     }
 
